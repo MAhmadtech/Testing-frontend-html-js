@@ -1,0 +1,158 @@
+import React, { useState } from 'react';
+import logo from "../assets/images/logo.svg";
+import googleLogo from "../assets/images/googleIcon.png";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+
+const URL = process.env.REACT_APP_BACKEND_URL + "/api/login";
+
+const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLanguage }) => {
+
+
+
+  // ---------------------
+
+
+  //default translation will be in English if some error happens 
+  //when the page load
+
+  const handleLanguageChange = (e) => {
+    setCurrentLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
+  };
+  // -----------------------------------------------
+  const [showPassword, setShowPassword] = useState(false);
+  let navigate = useNavigate();
+
+  const handleLogin = async (ev) => {
+    ev.preventDefault();
+    const email = ev.target.email.value;
+    const password = ev.target.password.value;
+    const formData = { email, password };
+
+    try {
+      const res = await axios.post(URL, formData);
+      const data = res.data;
+      if (data.success === true) {
+        console.log(data.message);
+        toast.success(data.message);
+        setLoginCredentials(true);
+
+        navigate("/analyse");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("An error  occurred. Please try again later.");
+    }
+  };
+
+  return (
+    <div className="bg-[#C9E2DC] w-full h-full p-14 md:w-6/12 md:bg-white md:rounded-tl-2xl md:rounded-bl-2xl lg:w-5/12">
+      <select
+        value={localStorage.getItem("i18nextLng")}
+        onChange={handleLanguageChange}
+      >
+        {/* //make sure to use the same json file name as the values */}
+        <option value="en">English</option>
+        <option value="fr">French</option>
+      </select>
+      <ToastContainer />
+      <div className="container mx-auto max-w-md">
+        <img src={logo} alt="Logo" />
+        <p className="text-[#035A53] mb-6">{t("underLogoText")}</p>
+        {/* Empower - Unmask - Thrive */}
+
+        <form className="space-y-4" onSubmit={handleLogin}>
+          <div className="w-full max-w-sm">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder={t("enterEmail")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-2">{t("password")}</label>
+            <div className="relative w-full max-w-sm">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="●●●●●●●●"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2 text-orange-500 cursor-pointer"
+              >
+                {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    {/* SVG paths */}
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    {/* SVG paths */}
+                  </svg>
+                )}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-center">
+            <a onClick={(e) => {
+              e.preventDefault();
+              setOpenTab('forgotPassword');
+            }} href="#" className="text-[#FF765B] hover:underline">{t("forgotPassword")}</a>
+
+
+          </div>
+
+          <div className="flex justify-center gap-3">
+            <button
+              onClick={() => { setOpenTab('signup'); }}
+              className="w-full px-4 py-2 bg-[#fff] rounded-[100px] border border-[#FF765B] hover:bg-[#FF765B]"
+            >
+              {t("signup")}
+            </button>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-[#fff] rounded-[100px] border border-[#FF765B] hover:bg-[#FF765B]"
+            >
+              {t("login")}
+            </button>
+          </div>
+
+          <div className="flex items-center my-6">
+            <hr className="flex-grow border-t border-gray-300" />
+            <span className="mx-4 text-gray-500">{t("or")}</span>
+            <hr className="flex-grow border-t border-gray-300" />
+          </div>
+
+          <div className="mb-4">
+            <button
+              type="button"
+              className="w-full py-2 bg-white border border-gray-300 text-gray-600 rounded-lg flex items-center justify-center shadow-sm transition duration-200 hover:bg-[#FF765B] hover:text-white"
+            >
+              <img className="h-5 w-5 mr-2" src={googleLogo} alt="Google logo" />
+              {t("googleSignIn")}
+            </button>
+          </div>
+        </form>
+
+        <p className="text-center text-gray-500 mt-4">
+          {t("termsPrivacy1")} <span className="text-[#FF765B]">{t("termsPrivacy2")}</span>{t("termsPrivacy3")}<span className="text-[#FF765B]">{t("termsPrivacy4")}</span>.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
