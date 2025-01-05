@@ -17,7 +17,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
       setConversation(newConversation);
       setUserInput('');
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/chatbot/', { message: userInput, Language: Language });
+        const response = await axios.post('https://chatbot-project-f3lh.onrender.com/api/chatbot/', { message: userInput, Language: Language });
         setConversation([...newConversation, { text: response.data.message, sender: 'bot' }]);
 
       } catch (error) {
