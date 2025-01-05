@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  font-family: Proxima Nova Lt, Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  --primary: #005666;
+  --secondary: #ff765b;
+  --info: #88c1ba;
+  --disableBg: #e5e7e7;
+  --customgray: #fbfbfb;
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-info {
+  background-color: var(--info);
+}
+
+.bg-disableBg {
+  background-color: var(--disableBg);
+}
+
+.bg-customgray {
+  background-color: var(--customgray);
+}
