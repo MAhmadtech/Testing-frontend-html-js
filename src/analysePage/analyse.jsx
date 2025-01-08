@@ -21,7 +21,7 @@ const Analyse = ({ currentLanguage }) => {
   // Fetch blog posts when component mounts and every 5 seconds
   useEffect(() => {
     const fetchPosts = () => {
-      fetch("http://localhost:8000/api/api/blog-posts/")
+      fetch("https://chatbot-project-f3lh.onrender.com//api/api/blog-posts/")
         .then(response => response.json())
         .then(data => setPosts(data))
         .catch(error => console.error('Error fetching posts:', error));
