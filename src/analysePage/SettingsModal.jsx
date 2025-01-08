@@ -106,14 +106,14 @@ const SettingsModal = ({ t }) => {
                     <i className="fa-regular fa-window-restore"></i>
                     {t("my_account")}
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => setOpenTab('Choose')}
                     className={`inline-flex items-center gap-3 text-base rounded-[100px] w-full px-4 py-3 duration-200 ease-in-out ${openTab === 'Choose' ? 'text-white bg-info' : 'text-primary bg-transparent'
                       } lg:text-lg lg:p-4`}
                   >
                     <i className="fa-regular fa-window-restore"></i>
                     {t("choose_language")}
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => setOpenTab('Privacy')}
                     className={`inline-flex items-center gap-3 text-base rounded-[100px] w-full px-4 py-3 duration-200 ease-in-out ${openTab === 'Privacy' ? 'text-white bg-info' : 'text-primary bg-transparent'
