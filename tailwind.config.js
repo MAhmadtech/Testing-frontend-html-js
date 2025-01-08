@@ -12,5 +12,30 @@ module.exports = {
       customgray: "#FBFBFB",
     },},
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.custom-scrollbar': {
+          'scrollbar-width': 'thin',
+          'scrollbar-color': '#006D81 #FFFFFF',
+        },
+        '.custom-scrollbar::-webkit-scrollbar': {
+          width: '8px',
+          height: '8px',
+        },
+        '.custom-scrollbar::-webkit-scrollbar-thumb': {
+          backgroundColor: '#006D81',
+          borderRadius: '10px',
+          border: '2px solid #B5B6B6',
+        },
+        '.custom-scrollbar::-webkit-scrollbar-track': {
+          backgroundColor: '#B5B6B6',
+          borderRadius: '2px',
+        },
+        '.custom-scrollbar::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: '#005666',
+        },
+      });
+    },
+  ],
 }

@@ -16,14 +16,14 @@ const ProfileTab = ({ t }) => {
 
         {/* Articles List */}
         <div className="overflow-x-auto">
-          <div className="flex gap-3 w-fit pb-8">
+          <div className="flex gap-3 w-fit">
             <ArticleCard />
             <ArticleCard />
           </div>
         </div>
 
         {/* Message History Section */}
-        <div className="mt-8">
+        <div className="mt-0">
           <h3 className="text-lg text-[#005666] font-semibold">{t("messageHistory")}</h3>
           <div className="flex gap-12 lg:gap-20">
             <MessageCard />

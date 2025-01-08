@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Analyse from './analysePage/analyse';
 import UserAccessScreen from './accessScreen/loginScreen';
 import PasswordReset from './accessScreen/resetPassword';
+import BlogPosts from './analysePage/blogpost';
+import readBlog from './analysePage/readBlog';
 
 function PrivateRoute({ element, isAuthenticated }) {
   // Log for debugging
@@ -27,10 +29,11 @@ function App() {
         {/* Protected Analyse Route */}
         <Route 
           path="/analyse"
-          element={<PrivateRoute isAuthenticated={LoginCredentials} element={<Analyse currentLanguage={currentLanguage} />} />} 
+          element={<PrivateRoute isAuthenticated={LoginCredentials} element={<Analyse currentLanguage={currentLanguage} />} />}
         />
 
         <Route path="/resetPassword" element={<PasswordReset />} />
+        {/* <Route path="/readblog" element={<readBlog description={currentLanguage} />} /> */}
       </Routes>
     </BrowserRouter>
   );

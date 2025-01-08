@@ -1,0 +1,26 @@
+/* Custom Scrollbar for blog component */
+.blog-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #006d81 #b5b6b6; /* Adjust colors for the scrollbar thumb and track */
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.blog-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.blog-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #006d81; /* Color of the thumb */
+  border-radius: 10px;
+  border: 2px solid #b5b6b6; /* Optional: Border around the thumb */
+}
+
+.blog-scrollbar::-webkit-scrollbar-track {
+  background-color: #b5b6b6; /* Color of the track */
+  border-radius: 10px;
+}
+
+.blog-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #005666; /* Change thumb color on hover */
+}
