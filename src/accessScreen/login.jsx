@@ -5,27 +5,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleLogin } from "@react-oauth/google";
 
-
-
-
-const URL = process.env.REACT_APP_BACKEND_URL + "/api/login";
+const GoogleViewURL = process.env.REACT_APP_BACKEND_URL + "/api/api/google-auth";
+const LoginViewURL = process.env.REACT_APP_BACKEND_URL + "/api/login";
 
 const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLanguage }) => {
-
-
-
-  // ---------------------
-
-
-  //default translation will be in English if some error happens 
-  //when the page load
-
-  const handleLanguageChange = (e) => {
-    setCurrentLanguage(e.target.value);
-    i18n.changeLanguage(e.target.value);
-  };
-  // -----------------------------------------------
   const [showPassword, setShowPassword] = useState(false);
   let navigate = useNavigate();
 
@@ -36,20 +21,44 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
     const formData = { email, password };
 
     try {
-      const res = await axios.post(URL, formData);
+      const res = await axios.post(LoginViewURL, formData);
       const data = res.data;
       if (data.success === true) {
         console.log(data.message);
         toast.success(data.message);
         setLoginCredentials(true);
-
         navigate("/analyse");
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error("An error  occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     }
+  };
+
+  const handleGoogleLogin = async (response) => {
+    const token = response.credential;  // Get the token from Google response
+
+    try {
+      const res = await axios.post(GoogleViewURL, { token });  // Send token to your backend for verification
+      const data = res.data;
+
+      if (data.success) {
+        console.log(data.message);
+        toast.success(data.message);
+        setLoginCredentials(true);
+        navigate("/analyse");  // Redirect to another page after successful login/signup
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred during Google login. Please try again.");
+    }
+  };
+
+  const handleLanguageChange = (e) => {
+    setCurrentLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
   };
 
   return (
@@ -58,7 +67,6 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
         value={localStorage.getItem("i18nextLng")}
         onChange={handleLanguageChange}
       >
-        {/* //make sure to use the same json file name as the values */}
         <option value="en">English</option>
         <option value="fr">French</option>
       </select>
@@ -111,8 +119,6 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
               e.preventDefault();
               setOpenTab('forgotPassword');
             }} href="#" className="text-[#FF765B] hover:underline">{t("forgotPassword")}</a>
-
-
           </div>
 
           <div className="flex justify-center gap-3">
@@ -136,19 +142,22 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
             <hr className="flex-grow border-t border-gray-300" />
           </div>
 
-          <div className="mb-4">
-            <button
-              type="button"
-              className="w-full py-2 bg-white border border-gray-300 text-gray-600 rounded-lg flex items-center justify-center shadow-sm transition duration-200 hover:bg-[#FF765B] hover:text-white"
-            >
-              <img className="h-5 w-5 mr-2" src={googleLogo} alt="Google logo" />
-              {t("googleSignIn")}
-            </button>
+          <div className="mb-4 flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={(error) => toast.error("Google login failed")}
+              useOneTap
+              theme="outline"
+              className="google-login-btn w-full max-w-xs px-4 py-2 bg-[#fff] rounded-[100px] border border-[#FF765B] hover:bg-[#FF765B]"
+              style={{ display: 'block', margin: '0 auto' }}  // This will center the Google button
+            />
           </div>
+
         </form>
 
         <p className="text-center text-gray-500 mt-4">
-          {t("termsPrivacy1")} <span className="text-[#FF765B]">{t("termsPrivacy2")}</span>{t("termsPrivacy3")}<span className="text-[#FF765B]">{t("termsPrivacy4")}</span>.
+          {t("termsPrivacy1")} <span className="text-[#FF765B]">{t("termsPrivacy2")}</span>{t("termsPrivacy3")}
+          <span className="text-[#FF765B]">{t("termsPrivacy4")}</span>.
         </p>
       </div>
     </div>

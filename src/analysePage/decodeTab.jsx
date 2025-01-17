@@ -18,7 +18,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
 
       try {
         // POST request to backend
-        const response = await axios.post('http://127.0.0.1:8000/api/chatbot/', {
+        const response = await axios.post('https://chatbot-project-f3lh.onrender.com/api/chatbot/', {
           message: userInput,
           Language: Language, // Correct variable usage
           prompt: prompt,    // Fixed key name
