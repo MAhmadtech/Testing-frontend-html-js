@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import i18next from "i18next";
 
-const PasswordReset = () => {
+const PasswordReset = ({ t }) => {
 
   const { i18n, t } = useTranslation(["Translations"]);
 
