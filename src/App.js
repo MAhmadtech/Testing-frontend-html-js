@@ -6,6 +6,13 @@ import PasswordReset from './accessScreen/resetPassword';
 import BlogPosts from './analysePage/blogpost';
 import readBlog from './analysePage/readBlog';
 
+function PrivateRoute({ element, isAuthenticated }) {
+  // Log for debugging
+  console.log('Is authenticated:', isAuthenticated);
+
+  return isAuthenticated ? element : <Navigate to="/" />;
+}
+
 function App() {
   const [LoginCredentials, setLoginCredentials] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('en');
@@ -16,16 +23,17 @@ function App() {
         {/* Login Screen Route */}
         <Route 
           path="/" 
-          element={<UserAccessScreen setCurrentLanguage={setCurrentLanguage} />} 
+          element={<UserAccessScreen setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
         />
 
-        {/* Public Analyse Route (no PrivateRoute anymore) */}
+        {/* Protected Analyse Route */}
         <Route 
           path="/analyse"
-          element={<Analyse currentLanguage={currentLanguage} />} 
+          element={<PrivateRoute isAuthenticated={LoginCredentials} element={<Analyse currentLanguage={currentLanguage} />} />}
         />
 
         <Route path="/resetPassword" element={<PasswordReset />} />
+        {/* <Route path="/readblog" element={<readBlog description={currentLanguage} />} /> */}
       </Routes>
     </BrowserRouter>
   );
