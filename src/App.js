@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Analyse from './analysePage/analyse';
 import UserAccessScreen from './accessScreen/loginScreen';
 import PasswordReset from './accessScreen/resetPassword';
@@ -17,7 +17,7 @@ function App() {
   const [currentLanguage, setCurrentLanguage] = useState('en'); // Tracks current language for i18n
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Login Screen */}
         <Route
@@ -43,15 +43,13 @@ function App() {
           }
         />
 
-        
-
         {/* Blog Posts */}
         {/* <Route path="/blogposts" element={<BlogPosts />} /> */}
 
         {/* Read Blog */}
         {/* <Route path="/readblog" element={<ReadBlog />} /> */}
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
