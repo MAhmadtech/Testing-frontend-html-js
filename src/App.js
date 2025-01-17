@@ -29,6 +29,8 @@ function App() {
             />
           }
         />
+        {/* Password Reset */}
+        <Route path="/resetPassword" element={<PasswordReset />} />
 
         {/* Protected Analyse Route */}
         <Route
@@ -41,8 +43,7 @@ function App() {
           }
         />
 
-        {/* Password Reset */}
-        <Route path="/resetPassword" element={<PasswordReset />} />
+        
 
         {/* Blog Posts */}
         {/* <Route path="/blogposts" element={<BlogPosts />} /> */}
