@@ -40,7 +40,7 @@ const UserAccessScreen = ({ setLoginCredentials, setCurrentLanguage }) => {
           </GoogleOAuthProvider>
         }
         {openTab === 'signup' && <SignUp openTab={openTab} setOpenTab={setOpenTab} t={t} />}
-        {openTab === 'resetPassword' && <PasswordReset t={t} />}
+        {openTab === 'resetPassword' && <PasswordReset />}
 
         <div className="hidden w-full md:w-6/12 md:block lg:w-7/12">
           <img className="w-full h-full object-cover rounded-tr-2xl rounded-br-2xl" src={openTab === 'login' ? illustration : illustrationGirl} alt="Background" />
