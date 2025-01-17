@@ -16,7 +16,7 @@ function App() {
         {/* Login Screen Route */}
         <Route 
           path="/" 
-          element={<UserAccessScreen setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
+          element={<UserAccessScreen setCurrentLanguage={setCurrentLanguage} />} 
         />
 
         {/* Public Analyse Route (no PrivateRoute anymore) */}
