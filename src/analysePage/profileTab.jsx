@@ -7,7 +7,7 @@ const ProfileTab = ({ t }) => {
 
   return (
     openTab === 'profile' && (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-10">
         {/* Liked Articles Header */}
         <div className="flex justify-between">
           <h3 className="text-2xl text-primary font-semibold">{t("likedArticles")}</h3>
