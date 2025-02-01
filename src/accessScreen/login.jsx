@@ -84,7 +84,7 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
               name="email"
               id="email"
               placeholder={t("enterEmail")}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
           </div>
 
@@ -96,7 +96,7 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
                 name="password"
                 id="password"
                 placeholder="●●●●●●●●"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
