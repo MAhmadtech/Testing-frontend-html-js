@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.svg";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -6,11 +6,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import illustrationGirl from "../assets/images/Illustrationgirl.jpg";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import i18next from "i18next";
 
 const PasswordReset = () => {
-
   const { i18n, t } = useTranslation(["Translations"]);
 
   useEffect(() => {
@@ -18,6 +16,7 @@ const PasswordReset = () => {
       i18next.changeLanguage("en");
     }
   }, []);
+
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
   };
@@ -42,19 +41,16 @@ const PasswordReset = () => {
     }
 
     try {
-      console.log(token);
       const formData = { id, token, password: newpassword };
       const res = await axios.post(URL, formData);
       const data = res.data;
 
       if (data.success) {
         toast.success(data.message);
-        console.log(data.message);
         setTimeout(() => {
           navigate("/");
         }, 2000);
       } else {
-        console.log(data.message);
         toast.error(data.message);
       }
     } catch (error) {
@@ -64,29 +60,24 @@ const PasswordReset = () => {
 
   return (
     <section className="flex flex-col gap-8 bg-customgray h-screen md:p-12 lg:flex-row lg:px-16 lg:py-12">
-
-      {/* ToastContainer is added here for toast notifications */}
       <ToastContainer />
-
       <div className="flex flex-col justify-between bg-white rounded-2xl shadow-[0px_50px_60px_-20px_#223A2833] w-full h-full md:flex-row">
-
-        <div className="bg-[#C9E2DC] w-full h-full p-14 md:w-6/12 md:bg-white md:rounded-tl-2xl md:rounded-bl-2xl lg:w-5/12">
+        <div className="bg-white w-full h-full p-14 md:w-6/12 md:bg-white md:rounded-tl-2xl md:rounded-bl-2xl lg:w-5/12">
           <select
             value={localStorage.getItem("i18nextLng")}
             onChange={handleLanguageChange}
+            className="mb-4"
           >
-            {/* //make sure to use the same json file name as the values */}
             <option value="en">English</option>
             <option value="fr">French</option>
           </select>
           <div className="container mx-auto max-w-md">
             <img src={logo} alt="Logo" />
             <p className="text-[#035A53] mb-6">{t("underLogoText")}</p>
-
             <form className="space-y-4" onSubmit={handleResetPassword}>
               <div>
                 <label className="block text-gray-700 mb-2">{t("password")}</label>
-                <div className="relative w-full max-w-sm">
+                <div className="relative w-full">
                   <input
                     id="newpassword"
                     name="newpassword"
@@ -106,7 +97,7 @@ const PasswordReset = () => {
 
               <div>
                 <label className="block text-gray-700 mb-2">{t("confirmPassword")}</label>
-                <div className="relative w-full max-w-sm">
+                <div className="relative w-full">
                   <input
                     id="confirmpassword"
                     name="confirmpassword"
@@ -126,7 +117,7 @@ const PasswordReset = () => {
 
               <button
                 type="submit"
-                className="w-full max-w-sm px-4 py-2 border border-[#ff765b] justify-center bg-[#fff] rounded-[100px] shadow hover:bg-[#ff765b] hover:text-[#fff]"
+                className="w-full px-4 py-2 border border-[#ff765b] bg-[#fff] rounded-[100px] shadow hover:bg-[#ff765b] hover:text-[#fff]"
               >
                 RESET PASSWORD
               </button>
@@ -134,8 +125,13 @@ const PasswordReset = () => {
           </div>
         </div>
 
-        <div className="hidden w-full md:w-6/12 md:block lg:w-7/12">
-          <img className="w-full h-full object-cover rounded-tr-2xl rounded-br-2xl" src={illustrationGirl} alt="Background" />
+        {/* Image Section */}
+        <div className="hidden md:block md:w-6/12 lg:w-7/12">
+          <img
+            className="w-full h-full object-cover rounded-tr-2xl rounded-br-2xl"
+            src={illustrationGirl}
+            alt="Background"
+          />
         </div>
       </div>
     </section>

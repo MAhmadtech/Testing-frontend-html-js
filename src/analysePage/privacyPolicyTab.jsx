@@ -6,11 +6,11 @@ const PrivacyTab = ({ t }) => {
   return (
     <div>
       {openTab === 'Privacy' && (
-        <div>
-          <h1 className="text-[#007f80] text-3xl bold text-base font-normal font-['Proxima Nova'] leading-tight">
+        <div className='h-[430px]'>
+          <h1 className="text-[#007f80] text-3xl bold  font-normal font-['Proxima Nova'] leading-tight">
             {t("privacyPolicy")}
           </h1>
-          <p className="text-[#007f80] text-sm text-base text-justify font-normal font-['Proxima Nova'] leading-tight">
+          <p className="text-[#007f80] text-sm text-justify font-normal font-['Proxima Nova'] leading-tight">
             {t("privacyPolicyMessage")}
           </p>
         </div>

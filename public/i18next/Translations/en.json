@@ -67,7 +67,7 @@
   "cancelPrompt": "Are you sure you want to cancel your\nPocket Ally subscription?",
   "cancel": "Cancel",
   "keepIt": "No, keep it",
-  "enableFollowUp": "Enable Follow-up Questions",
+  "enableFollowUp": "Enable Follow-up Questions?",
   "accountDetails": "Account Details",
   "accountInfoText": "We value your privacy, and the information you submit here is only for our internal operational use. We will never share your information with any third party outside our network under any circumstances!",
   "name": "Name",

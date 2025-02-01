@@ -6,11 +6,11 @@ const TermsTab = ({ t }) => {
   return (
     <div>
       {openTab === 'Terms' && (
-        <div>
-          <h1 className="text-[#007f80] text-3xl bold text-base font-normal font-['Proxima Nova'] leading-tight">
+        <div className='h-[430px]'>
+          <h1 className="text-[#007f80] text-3xl bold font-normal font-['Proxima Nova'] leading-tight">
             {t("termsOfUse")}
           </h1>
-          <p className="text-[#007f80] text-sm text-base text-justify font-normal font-['Proxima Nova'] leading-tight">
+          <p className="text-[#007f80] text-sm  text-justify font-normal font-['Proxima Nova'] leading-tight">
             {t("termsOfUseMessage")}
           </p>
         </div>
