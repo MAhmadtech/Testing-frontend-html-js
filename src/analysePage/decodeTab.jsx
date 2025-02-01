@@ -61,7 +61,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
     <div className={`flex flex-col h-[70vh] lg:h-full ${openTab === 'decode' ? 'block' : 'hidden'}`}>
       {/* 🔥 Conversation area (only this part is scrollable) */}
       <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-        <div className="conversation flex flex-col gap-2 h-auto min-h-[240px]">
+        <div className="conversation flex flex-col gap-2 h-auto min-h-[44vh]">
           {conversation.map((message, index) => (
             <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start flex-col'}`}>
               {message.sender === 'user' ? (
@@ -131,11 +131,11 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
               }
             }}
             value={userInput}
-            className="border-[1px] border-info rounded-xl w-full h-[110px] p-5 bg-white focus:outline-none"
+            className="border-[1px] border-info rounded-xl w-full h-[80px] p-5 bg-white focus:outline-none"
           />
           <div className="text-sm text-[#B5B6B6] font-medium">0/255</div>
         </div>
-        <div className="flex justify-end mt-2">
+        <div className="flex justify-end">
           <button
             onClick={sendMessage}
             className="w-[183px] h-[52px] bg-[#ff765b] rounded-[100px] shadow hover:bg-[#005666] ml-auto"

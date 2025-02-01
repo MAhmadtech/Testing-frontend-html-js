@@ -90,7 +90,7 @@ const Analyse = ({ currentLanguage }) => {
         </div>
         <div className="text-lg text-primary font-medium">{t("testItOut")}</div>
 
-        <div className="custom-scrollbar bg-white rounded-[15px] relative shadow-md w-full p-6 h-auto overflow-y-auto">
+        <div className="custom-scrollbar bg-white rounded-[15px] relative shadow-md w-full p-2 h-auto overflow-y-auto">
           {openTab === 'decode' && (
             <DecodeTab
               userInput={userInput}
