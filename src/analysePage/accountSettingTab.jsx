@@ -23,7 +23,7 @@ const AccountTab = ({ openTab, t }) => {
       <div className="max-w-md mx-auto bg-white px-4">
         {/* Name Input */}
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm text-left font-bold mb-2">{t("name")}</label>
+          <label htmlFor="name" className="block text-gray-700 bg-white text-sm text-left font-bold mb-2">{t("name")}</label>
           <input
             type="text"
             id="name"
@@ -34,7 +34,7 @@ const AccountTab = ({ openTab, t }) => {
 
         {/* Email Input */}
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 text-sm text-left font-bold mb-2">{t("email")}</label>
+          <label htmlFor="email" className="block text-gray-700 bg-white text-sm text-left font-bold mb-2">{t("email")}</label>
           <input
             type="email"
             id="email"

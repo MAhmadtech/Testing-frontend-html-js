@@ -66,7 +66,7 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
       <select
         value={localStorage.getItem("i18nextLng")}
         onChange={handleLanguageChange}
-        className="min-w-xs text-left"  // Add w-auto and optional mx-auto for centering
+        className="min-w-xs text-left bg-white border-gray-300"  // Add w-auto and optional mx-auto for centering
       >
         <option value="en">English</option>
         <option value="fr">French</option>
