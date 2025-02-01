@@ -28,18 +28,18 @@ const AccountTab = ({ openTab, t }) => {
             type="text"
             id="name"
             placeholder={t("namePlaceholder")}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-300  rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
           />
         </div>
 
         {/* Email Input */}
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 bg-white text-sm text-left font-bold mb-2">{t("email")}</label>
+          <label htmlFor="email" className="block text-gray-700 bg-white  text-sm text-left font-bold mb-2">{t("email")}</label>
           <input
             type="email"
             id="email"
             placeholder={t("emailPlaceholder")}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-300 bg-white rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
           />
         </div>
 
