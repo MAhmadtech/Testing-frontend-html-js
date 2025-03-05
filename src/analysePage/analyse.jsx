@@ -68,29 +68,31 @@ const Analyse = ({ currentLanguage }) => {
 
       {/* Main Content Area */}
       <div className="flex flex-col w-full lg:w-8/12">
-        <div className="flex flex-row justify-between items-center">
-          <div className="text-2xl text-primary font-semibold">{t("gutFeeling")}</div>
-          {/* Toggle Button parallel to "gutFeeling" text */}
-          <label htmlFor="toggleFreePremium" className="flex items-center cursor-pointer">
-            <div className="relative">
-              <input
-                id="toggleFreePremium"
-                type="checkbox"
-                checked={promptType === 'premium'}
-                onChange={handlePromptTypeChange} // Update state with the new value
-                className="sr-only"
-              />
-              <div className="block bg-gray-300 w-14 h-8 rounded-full"></div>
-              <div
-                className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition ${promptType === 'premium' ? 'transform translate-x-6 bg-primary' : ''}`}
-              ></div>
-            </div>
-            <div className="ml-3 text-sm font-semibold">{promptType === 'free' ? t("Free") : t("Premium")}</div>
-          </label>
+        <div className='p-6 md:p-0'>
+          <div className="flex flex-row justify-between items-center">
+            <div className="text-2xl text-primary font-semibold">{t("gutFeeling")}</div>
+            {/* Toggle Button parallel to "gutFeeling" text */}
+            <label htmlFor="toggleFreePremium" className="flex items-center cursor-pointer">
+              <div className="relative">
+                <input
+                  id="toggleFreePremium"
+                  type="checkbox"
+                  checked={promptType === 'premium'}
+                  onChange={handlePromptTypeChange} // Update state with the new value
+                  className="sr-only"
+                />
+                <div className="block bg-gray-300 w-14 h-8 rounded-full"></div>
+                <div
+                  className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition ${promptType === 'premium' ? 'transform translate-x-6 bg-primary' : ''}`}
+                ></div>
+              </div>
+              <div className="ml-3 text-sm font-semibold">{promptType === 'free' ? t("Free") : t("Premium")}</div>
+            </label>
+          </div>
+          <div className="text-lg text-primary font-medium">{t("testItOut")}</div>
         </div>
-        <div className="text-lg text-primary font-medium">{t("testItOut")}</div>
 
-        <div className="custom-scrollbar bg-white rounded-[15px] relative shadow-md w-full p-6 h-auto overflow-y-auto">
+        <div className="custom-scrollbar overflow-y-auto bg-white rounded-[15px] relative shadow-md w-full p-6 h-auto">
           {openTab === 'decode' && (
             <DecodeTab
               userInput={userInput}
@@ -98,7 +100,8 @@ const Analyse = ({ currentLanguage }) => {
               conversation={conversation}
               setConversation={setConversation}
               currentLanguage={currentLanguage}
-              prompt={prompt} // Ensure prompt is passed properly
+              prompt={prompt}
+              promptType={promptType} // Ensure prompt is passed properly
               t={t}
             />
           )}

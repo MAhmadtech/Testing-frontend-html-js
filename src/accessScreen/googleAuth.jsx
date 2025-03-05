@@ -1,12 +1,13 @@
 // src/accessScreen/googleAuth.js
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
+const URL = process.env.REACT_APP_BACKEND_URL
 
 const GoogleAuth = ({ setLoginCredentials }) => {
   const handleLogin = (response) => {
     const token = response.credential;
 
-    fetch("http://localhost:8000/api/api/google-auth/", {
+    fetch(URL + "/api/api/google-auth/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
