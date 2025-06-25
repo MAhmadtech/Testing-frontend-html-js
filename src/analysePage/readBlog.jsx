@@ -3,9 +3,12 @@ import axios from "axios";
 import { motion } from "framer-motion"; // For animation
 import { HeartIcon } from "@heroicons/react/solid"; // Heart icon for like
 import BlogComponent from "./blogComponent";
+const URL = process.env.REACT_APP_BACKEND_URL
+
 
 const ReadBlog = ({ likes, id, userId, image, title, description, t, posts, currentLanguage }) => {
   const [showBlogComponent, setShowBlogComponent] = useState(false);
+
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
   const [loading, setLoading] = useState(true);
@@ -13,7 +16,7 @@ const ReadBlog = ({ likes, id, userId, image, title, description, t, posts, curr
   // Function to check if the user already liked the blog post
   const fetchLikeStatus = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/likeBlog/${userId}/${id}/`);
+      const response = await axios.get(`${URL}/${userId}/${id}/`);
       setLiked(response.data.is_liked);
     } catch (error) {
       console.error("Error fetching like status:", error);
