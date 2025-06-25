@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ResponseBubble = ({ Title, response, Question }) => {
+const ResponseBubble = ({ currentLanguage, Title, response, Question }) => {
   // State to handle the copy status
   const [copied, setCopied] = useState(false);
   const [listen, setListen] = useState(false);
@@ -21,17 +21,23 @@ const ResponseBubble = ({ Title, response, Question }) => {
 
   // Function to handle listening (speak the text)
   const handleListen = () => {
-    setListen(true);
-    const textToRead = Title !== 'NoTitle' ? response : Question;
+    if (!listen) {
+      setListen(true);
+      const textToRead = Title !== 'NoTitle' ? response : Question;
 
-    if (textToRead) {
-      const speech = new SpeechSynthesisUtterance(textToRead);
-      speech.lang = 'en-US'; // Set the language to English (US)
-      speech.onend = () => {
-        setListen(false); // Reset listen to false when the speech ends
-      };
-      window.speechSynthesis.speak(speech);
+      if (textToRead) {
+        const speech = new SpeechSynthesisUtterance(textToRead);
+        speech.lang = currentLanguage === 'en' ? 'en-US' : 'fr-FR'; // Set the language to English (US)
+        speech.onend = () => {
+          setListen(false); // Reset listen to false when the speech ends
+        };
+        window.speechSynthesis.speak(speech);
 
+      }
+    }
+    else {
+      window.speechSynthesis.cancel();
+      setListen(false);
     }
   };
 

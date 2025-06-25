@@ -31,8 +31,8 @@
   "newPost": "New Post",
   "postTitle": "Unmasking Manipulation",
   "postDescription": "How to Recognise and Respond to Toxic Messages",
-  "views": "250 views",
-  "likes": "250 likes",
+  "views": "views",
+  "likes": "likes",
   "allTopics": "All Topics",
   "couples": "Couples",
   "toxicBehaviour": "Toxic Behaviour",
@@ -89,5 +89,15 @@
   "choose_language": "Choose Language",
   "privacy_policy": "Privacy Policy",
   "terms_of_use": "Terms of Use",
-  "close_modal": "Close"
+  "close_modal": "Close",
+  "edit":"Edit",
+  "saving":"Saving...",
+  "free":"Free",
+  "Premium":"Premium",
+  "loadingArticles":"Loading Articles...",
+  "loadingMessages":"Loading Messages...",
+  "readMore":"readMore",
+  "teaReadyLogoText":"We're getting the tea ready...",
+  "refineAnalysis":"REFINE ANALYSIS",
+  "response":"RESPONSE"
 }

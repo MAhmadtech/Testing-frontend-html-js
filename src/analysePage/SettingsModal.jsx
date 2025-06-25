@@ -8,7 +8,7 @@ import PrivacyTab from './privacyPolicyTab';
 import CountryLanguageSelector from './chooseLanguageTab';
 import TermsTab from './termsOfUseTab';
 
-const SettingsModal = ({ t }) => {
+const SettingsModal = ({ first_name, email, t }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [openTab, setOpenTab] = useState('subscribe');
 
@@ -92,7 +92,7 @@ const SettingsModal = ({ t }) => {
                   {openTab === 'subscribe' && <SubscribeTab openTab={openTab} t={t} />}
                   {openTab === 'restore' && <RestorePurchaseTab openTab={openTab} t={t} />}
                   {openTab === 'follow' && <FollowUpTab openTab={openTab} t={t} />}
-                  {openTab === 'Account' && <AccountTab openTab={openTab} t={t} />}
+                  {openTab === 'Account' && <AccountTab openTab={openTab} first_name={first_name} email={email} t={t} />}
                   {openTab === 'Privacy' && <PrivacyTab openTab={openTab} t={t} />}
                   {openTab === 'Terms' && <TermsTab openTab={openTab} t={t} />}
                 </div>

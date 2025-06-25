@@ -31,8 +31,8 @@
   "newPost": "Nouvel article",
   "postTitle": "Démasquer la manipulation",
   "postDescription": "Comment reconnaître et répondre aux messages toxiques",
-  "views": "250 vues",
-  "likes": "250 j'aime",
+  "views": "vues",
+  "likes": "j'aime",
   "allTopics": "Tous les sujets",
   "couples": "Couples",
   "toxicBehaviour": "Comportement toxique",
@@ -89,5 +89,17 @@
   "choose_language": "Choisir la langue",
   "privacy_policy": "Politique de confidentialité",
   "terms_of_use": "Conditions d'utilisation",
-  "close_modal": "Fermer"
+  "close_modal": "Fermer",
+  "edit":"Modifier",
+  "saving":"Sauvegarder...",
+  "free":"Gratuite",
+  "premium":"Prime",
+  "loadingArticles":"Chargement des articles...",
+  "loadingMessages":"Chargement des messages...",
+  "readMore":"En savoir plus",
+  "teaReadyLogoText":"Nous préparons le thé...",
+  "refineAnalysis":"AFFINER L'ANALYSE",
+  "response":"RÉPONSE"
+
+
 }

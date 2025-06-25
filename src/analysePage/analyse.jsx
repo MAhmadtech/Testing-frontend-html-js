@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import logo from "../assets/images/logo.svg";
 import TabButtons from './TabButtons';
 import SettingsModal from './SettingsModal';
@@ -7,7 +8,17 @@ import DecodeTab from './decodeTab';
 import BlogComponent from './blogComponent';
 import ProfileTab from './profileTab';
 
+const BlogPostsURL = process.env.REACT_APP_BACKEND_URL + "/api/api/blog-posts/";
+
 const Analyse = ({ currentLanguage }) => {
+  const location = useLocation();
+  const userId = location.state?.id || "";
+  const first_name = location.state?.first_name || "";
+  const email = location.state?.email || "";
+  // console.log("iddd: ", userId)
+  // console.log("nnn: ", first_name)
+  // console.log("eee: ", email)
+
   const [openTab, setOpenTab] = useState('decode');
   const { i18n, t } = useTranslation(["Translations"]);
   const [posts, setPosts] = useState([]);
@@ -21,7 +32,7 @@ const Analyse = ({ currentLanguage }) => {
   // Fetch blog posts when component mounts and every 5 seconds
   useEffect(() => {
     const fetchPosts = () => {
-      fetch("https://chatbot-project-f3lh.onrender.com/api/api/blog-posts/")
+      fetch(BlogPostsURL)
         .then(response => response.json())
         .then(data => setPosts(data))
         .catch(error => console.error('Error fetching posts:', error));
@@ -29,7 +40,6 @@ const Analyse = ({ currentLanguage }) => {
 
     // Initial fetch
     fetchPosts();
-
     // Set interval to fetch posts every 5 seconds
     const intervalId = setInterval(fetchPosts, 5000);
 
@@ -61,7 +71,7 @@ const Analyse = ({ currentLanguage }) => {
       <aside className="flex flex-col sm:flex-row lg:flex-col justify-between bg-white rounded-[15px] shadow-md w-full lg:w-[256px] p-4 overflow-hidden">
         <div className="flex flex-col items-center sm:items-start lg:items-center gap-16 w-full">
           <img src={logo} alt="logo" width="158" height="50" className="max-w-[80%] sm:max-w-[60%] lg:max-w-full" />
-          <TabButtons openTab={openTab} setOpenTab={setOpenTab} t={t} />
+          <TabButtons openTab={openTab} setOpenTab={setOpenTab} first_name={first_name} email={email} t={t} />
         </div>
         {/* <SettingsModal t={t} className="w-full" /> */}
       </aside>
@@ -86,7 +96,7 @@ const Analyse = ({ currentLanguage }) => {
                   className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition ${promptType === 'premium' ? 'transform translate-x-6 bg-primary' : ''}`}
                 ></div>
               </div>
-              <div className="ml-3 text-sm font-semibold">{promptType === 'free' ? t("Free") : t("Premium")}</div>
+              <div className="ml-3 text-sm font-semibold">{promptType === 'free' ? t("free") : t("premium")}</div>
             </label>
           </div>
           <div className="text-lg text-primary font-medium">{t("testItOut")}</div>
@@ -95,6 +105,7 @@ const Analyse = ({ currentLanguage }) => {
         <div className="custom-scrollbar overflow-y-auto bg-white rounded-[15px] relative shadow-md w-full p-6 h-auto">
           {openTab === 'decode' && (
             <DecodeTab
+              userId={userId}
               userInput={userInput}
               setUserInput={setUserInput}
               conversation={conversation}
@@ -105,8 +116,8 @@ const Analyse = ({ currentLanguage }) => {
               t={t}
             />
           )}
-          {openTab === 'blog' && <BlogComponent t={t} posts={posts} currentLanguage={currentLanguage} />}
-          {openTab === 'profile' && <ProfileTab t={t} />}
+          {openTab === 'blog' && <BlogComponent t={t} posts={posts} currentLanguage={currentLanguage} userId={userId} />}
+          {openTab === 'profile' && <ProfileTab t={t} userId={userId} />}
         </div>
       </div>
     </section>

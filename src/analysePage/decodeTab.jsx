@@ -4,20 +4,26 @@ import MessageBubble from './messageBubble';
 import ResponseBubble from './responseBubble';
 import Icon from '../assets/images/tea.png';
 import { MdMic, MdMicOff } from 'react-icons/md';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { jsPDF } from 'jspdf';
 import html2pdf from 'html2pdf.js'; // Import html2pdf.js
 const URL = process.env.REACT_APP_BACKEND_URL
 
 
 
-const DecodeComponent = ({ userInput, setUserInput, conversation, setConversation, currentLanguage, prompt, promptType, t }) => {
+const DecodeComponent = ({ userId, userInput, setUserInput, conversation, setConversation, currentLanguage, prompt, promptType, t }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+
   const [openTab] = useState('decode');
   const [LastQuestion, setLastQuestion] = useState('5');
   // const [refineResponse, setRefineResponse] = useState(null); // Track the response for refining the analysis
   const [isListening, setIsListening] = useState(false); // Track whether speech recognition is active
   const [recognition, setRecognition] = useState(null); // Store SpeechRecognition instance
   const Language = currentLanguage === 'en' ? 'English' : 'French';
+  console.log("Decode Current Language: ", Language)
+
   const conversationEndRef = useRef(null);
   const conversationDivRef = useRef(null);
 
@@ -31,7 +37,8 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       const recognitionInstance = new SpeechRecognition();
-      recognitionInstance.lang = 'en-US'; // You can adjust the language here
+      recognitionInstance.lang = currentLanguage === 'en' ? 'en-US' : 'fr-FR';
+      console.log("Voice Language: ", recognitionInstance.lang)
       recognitionInstance.continuous = true;
       recognitionInstance.interimResults = true;
 
@@ -55,6 +62,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
       setUserInput('');
 
       try {
+        console.log("Current Language:", Language)
         const response = await axios.post(URL + '/api/chatbot/', {
           message: userInput,
           conversation: conversation,
@@ -91,6 +99,56 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
     setLastQuestion("5");
     setUserInput('');
   };
+  const MakeStorableList = async (messages) => {
+    setIsSaving(true);
+    console.log(messages)
+    const storableList = [];
+
+    messages.forEach(message => {
+      if (message.sender === 'user') {
+        storableList.push({ message: message.text, sender: message.sender }); // Only store the text for user
+      } else if (message.sender === 'assistant') {
+        try {
+          const parsed = JSON.parse(message.text);
+          const title = parsed.Title || "NoTitle";
+          const info = parsed.Info || parsed.Question || "No info";
+
+          if (title === 'NoTitle') {
+            if (parsed.Question === 'NoQuestion') {
+              storableList.push({ Title: "", Info: info, sender: "assistant" });
+            }
+            else {
+              storableList.push({ Title: "Question", Info: parsed.Question, sender: "assistant" });
+            }
+          } else {
+            storableList.push({ Title: title, Info: info, sender: "assistant" });
+          }
+        } catch (error) {
+          console.error("Failed to parse assistant message:", message.text);
+        }
+      }
+    });
+
+    try {
+      console.log("StorableList: ", storableList)
+      const res = await axios.post(`${URL}/api/save-conversation/`, {
+        user_id: userId,
+        content: storableList,
+      });
+
+      if (res.status === 201) {
+        toast.success("We've sent Analsis to your email!");
+        setIsSaving(false)
+      }
+    } catch (err) {
+      console.error('Error saving conversation:', err);
+      toast.error('Error: Please try again!');
+      setIsSaving(false)
+
+    }
+  };
+
+
 
   // Handle refine analysis response
   const handleRefineResponse = async (response) => {
@@ -170,6 +228,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
 
   // Start and stop speech recognition
   const toggleListening = () => {
+    console.log("Speech")
     if (isListening) {
       recognition.stop();
       setIsListening(false);
@@ -220,6 +279,8 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
     <div ref={conversationDivRef} className={`flex flex-col min-h-[45vh] md:min-h-[71vh] lg:h-full ${openTab === 'decode' ? 'block' : 'hidden'}`}>
       {/* Conversation Area */}
       <div className="flex-1 p-4">
+        <ToastContainer />
+
         <div className="conversation flex flex-col gap-2 ">
           {conversation.map((message, index) => (
             <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start flex-col'}`}>
@@ -236,7 +297,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
 
                   return (
                     <>
-                      <ResponseBubble Title={parsedData.Title} response={parsedData.Info} Question={parsedData.Question} />
+                      <ResponseBubble currentLanguage={currentLanguage} Title={parsedData.Title} response={parsedData.Info} Question={parsedData.Question} />
                       {index === conversation.length - 1 && (
                         <div className="relative flex flex-wrap justify-start items-center gap-2.5 mb-4">
                           <button
@@ -247,12 +308,15 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
                           </button>
 
                           <button
-                            onClick={downloadPDF}
+                            onClick={() => MakeStorableList(conversation)}
+
+
+
                             className="w-full sm:w-56 h-12 sm:h-[52px] rounded-full text-[#ff765b] shadow border border-[#ff765b] hover:text-white hover:bg-[#ff765b] text-center text-sm sm:text-base font-semibold leading-normal px-4 py-2 transition duration-300 ease-in-out"
                           >
-                            {t('save')}
+                            {isSaving ? t('saving') : t('save')}
                           </button>
-                        </div>
+                        </div >
                       )}
                       {index === conversation.length - 1 && LastQuestion === '5' && promptType === 'premium' && (
                         <div className="relative flex flex-wrap justify-start items-center gap-2.5 mb-4">
@@ -261,7 +325,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
                             onClick={() => handleRefineResponse('yes')}
                             className="w-full sm:w-56 h-12 sm:h-[52px] rounded-full text-[#ff765b] shadow border border-[#ff765b] hover:text-white hover:bg-[#ff765b] text-center text-sm sm:text-base font-semibold leading-normal px-4 py-2 transition duration-300 ease-in-out"
                           >
-                            REFINE ANALYSIS
+                            {t("refineAnalysis")}
                           </button>
 
                           {/* Yes/No buttons for refine analysis */}
@@ -269,7 +333,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
                             onClick={() => handleProvideResponse('yes')}
                             className="w-full sm:w-56 h-12 sm:h-[52px] rounded-full text-[#ff765b] shadow border border-[#ff765b] hover:text-white hover:bg-[#ff765b] text-center text-sm sm:text-base font-semibold leading-normal px-4 py-2 transition duration-300 ease-in-out"
                           >
-                            RESPONSE
+                            {t("response")}
                           </button>
 
 
@@ -335,7 +399,7 @@ const DecodeComponent = ({ userInput, setUserInput, conversation, setConversatio
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

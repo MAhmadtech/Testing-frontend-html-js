@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from "../assets/images/logo.svg";
 import googleLogo from "../assets/images/googleIcon.png";
 import axios from "axios";
@@ -12,7 +12,14 @@ const LoginViewURL = process.env.REACT_APP_BACKEND_URL + "/api/login";
 
 const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLanguage }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [language, setLanguage] = useState('en'); // default English
+
   let navigate = useNavigate();
+
+  useEffect(() => {
+    i18n.changeLanguage('en'); // Always set to English when page loads
+    localStorage.setItem('i18nextLng', 'en'); // Also update localStorage
+  }, [i18n]);
 
   const handleLogin = async (ev) => {
     ev.preventDefault();
@@ -27,7 +34,7 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
         console.log(data.message);
         toast.success(data.message);
         setLoginCredentials(true);
-        navigate("/analyse");
+        navigate("/analyse", { state: { id: data.id, first_name: data.first_name, email: data.email } });
       } else {
         toast.error(data.message);
       }
@@ -37,17 +44,15 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
   };
 
   const handleGoogleLogin = async (response) => {
-    const token = response.credential;  // Get the token from Google response
-
+    const token = response.credential;
     try {
-      const res = await axios.post(GoogleViewURL, { token });  // Send token to your backend for verification
+      const res = await axios.post(GoogleViewURL, { token });
       const data = res.data;
-
       if (data.success) {
-        console.log(data.message);
+        console.log(data);
         toast.success(data.message);
         setLoginCredentials(true);
-        navigate("/analyse");  // Redirect to another page after successful login/signup
+        navigate("/analyse", { state: { id: data.data.id, first_name: data.data.first_name, email: data.data.email } });
       } else {
         toast.error(data.message);
       }
@@ -57,25 +62,28 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
   };
 
   const handleLanguageChange = (e) => {
-    setCurrentLanguage(e.target.value);
-    i18n.changeLanguage(e.target.value);
+    const selectedLanguage = e.target.value;
+    setLanguage(selectedLanguage);
+    setCurrentLanguage(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+    localStorage.setItem('i18nextLng', selectedLanguage);
   };
 
   return (
     <div className="bg-white w-full h-full p-6 flex flex-col justify-center text-center md:w-10/12 lg:w-10/12">
       <select
-        value={localStorage.getItem("i18nextLng")}
+        value={language}
         onChange={handleLanguageChange}
-        className="min-w-xs text-left bg-white border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"  // Add w-auto and optional mx-auto for centering
+        className="min-w-xs text-left bg-white border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
       >
         <option value="en">English</option>
         <option value="fr">French</option>
       </select>
+
       <ToastContainer />
       <div className="container mx-auto max-w-md">
         <img src={logo} alt="Logo" />
         <p className="text-[#035A53] text-left mb-6">{t("underLogoText")}</p>
-        {/* Empower - Unmask - Thrive */}
 
         <form className="space-y-4" onSubmit={handleLogin}>
           <div className="w-full">
@@ -104,11 +112,11 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
               >
                 {showPassword ? (
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths */}
+                    {/* eye open */}
                   </svg>
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths */}
+                    {/* eye closed */}
                   </svg>
                 )}
               </span>
@@ -116,10 +124,13 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
           </div>
 
           <div className="flex justify-center">
-            <a onClick={(e) => {
-              e.preventDefault();
-              setOpenTab('forgotPassword');
-            }} href="#" className="text-[#FF765B] hover:underline">{t("forgotPassword")}</a>
+            <a
+              onClick={(e) => { e.preventDefault(); setOpenTab('forgotPassword'); }}
+              href="#"
+              className="text-[#FF765B] hover:underline"
+            >
+              {t("forgotPassword")}
+            </a>
           </div>
 
           <div className="flex justify-center gap-3">
@@ -146,11 +157,11 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
           <div className="mb-4 flex justify-center">
             <GoogleLogin
               onSuccess={handleGoogleLogin}
-              onError={(error) => toast.error("Google login failed")}
+              onError={() => toast.error("Google login failed")}
               useOneTap
               theme="outline"
               className="google-login-btn w-full max-w-xs px-4 py-2 bg-[#fff] rounded-[100px] border border-[#FF765B] hover:bg-[#FF765B]"
-              style={{ display: 'block', margin: '0 auto' }}  // This will center the Google button
+              style={{ display: 'block', margin: '0 auto' }}
             />
           </div>
 

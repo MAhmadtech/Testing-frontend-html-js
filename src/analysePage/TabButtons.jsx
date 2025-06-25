@@ -1,7 +1,7 @@
 import React from 'react';
 import SettingsModal from './SettingsModal';
 
-const TabButtons = ({ openTab, setOpenTab, t }) => {
+const TabButtons = ({ openTab, setOpenTab, first_name, email, t }) => {
   return (
     <div className="flex flex-row gap-4 sm:gap-6 md:gap-8 lg:flex-col">
       <button
@@ -28,7 +28,7 @@ const TabButtons = ({ openTab, setOpenTab, t }) => {
         <i className="fa-solid fa-user text-lg sm:text-xl"></i>
         <span className="hidden sm:inline">{t("myProfile")}</span>
       </button>
-      <SettingsModal t={t} />
+      <SettingsModal first_name={first_name} email={email} t={t} />
     </div>
   );
 };

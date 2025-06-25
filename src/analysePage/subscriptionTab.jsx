@@ -1,6 +1,22 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import walletLogo from "../assets/images/Group 1686552886.png";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_51PrDciRqntFh4boqzfXyXefoqV1iWvzRiYMl3kD8aqBBOPGu3KPCHr9wG7HZMGJmrPzfnF2RNw2jL8BpdqGiD4tD00uded60JB"); // Your publishable key
+
+const handleCheckout = async () => {
+  const stripe = await stripePromise;
+  const response = await fetch("http://localhost:8000/api/create-checkout-session/", {
+    method: "POST",
+  });
+  const session = await response.json();
+  console.log(session)
+  const result = await stripe.redirectToCheckout({ sessionId: session.id });
+  if (result.error) {
+    alert(result.error.message);
+  }
+};
+
 
 const SubscriptionTab = ({ t }) => {
   const [renewTransaction, setRenewTransaction] = useState(false);
@@ -21,7 +37,7 @@ const SubscriptionTab = ({ t }) => {
         <div className="flex flex-wrap gap-4 justify-start overflow-x-auto mb-6"> {/* Horizontal scroll allowed */}
           {/* Subscription Option 1 */}
           <div className="w-full sm:w-[122px] h-[132px] relative flex-shrink-0">
-            <button className="w-full h-full bg-white rounded-[10px] border border-[#b5b5b5] flex flex-col justify-center items-start gap-2 hover:border-[#ff765b] hover:text-[#ff765b] p-3">
+            <button onClick={handleCheckout} className="w-full h-full bg-white rounded-[10px] border border-[#b5b5b5] flex flex-col justify-center items-start gap-2 hover:border-[#ff765b] hover:text-[#ff765b] p-3">
               <div className="self-stretch text-[#b5b5b5] text-xs font-bold">{t("threeMonths")}</div>
               <div className="self-stretch text-[#b5b5b5] text-2xl font-semibold">{t("threeMonthsPrice")}</div>
               <div className="self-stretch text-[#b5b5b5] text-[10px] font-bold">{t("threeMonthsDetails")}</div>

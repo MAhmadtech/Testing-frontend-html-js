@@ -16,7 +16,7 @@ const SignUp = ({ openTab, setOpenTab, t }) => {
   const handleRegister = async (ev) => {
     ev.preventDefault();
     setPasswordError("");
-
+    const first_name = ev.target.first_name.value;
     const email = ev.target.email.value;
     const password = ev.target.password.value;
     const confirmpassword = ev.target.confirmpassword.value;
@@ -25,7 +25,7 @@ const SignUp = ({ openTab, setOpenTab, t }) => {
       setPasswordError("Passwords do not match.");
       toast.error("Error: Passwords do not match.");
     } else {
-      const formData = { email: email, password: password };
+      const formData = { first_name: first_name, email: email, password: password };
       try {
         await axios.post(URL, formData);
         toast.success("Registration successful!");
@@ -38,13 +38,24 @@ const SignUp = ({ openTab, setOpenTab, t }) => {
   };
 
   return (
-    <div className="bg-white w-full h-full p-6 flex flex-col justify-center text-center md:w-10/12 lg:w-10/12">
+    <div className="bg-white w-full h-full  flex flex-col justify-center text-center md:w-10/12 lg:w-10/12">
       <ToastContainer />
       <div className="container mx-auto max-w-md">
         <img src={logo} alt="Logo" />
-        <p className="text-[#035A53] text-left mb-6">{t("underLogoText")}</p>
+        <p className="text-[#035A53] text-left mb-2">{t("underLogoText")}</p>
 
-        <form className="space-y-4" action="POST" onSubmit={handleRegister}>
+        <form className="space-y-2" action="POST" onSubmit={handleRegister}>
+          <label className="block text-left text-gray-700">{t("name")}</label>
+          <div className="w-full">
+            <input
+              type="first_name"
+              name="first_name"
+              id="first_name"
+              placeholder="Enter your name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+          </div>
+          <label className="block text-left text-gray-700">{t("email")}</label>
           <div className="w-full">
             <input
               type="email"
@@ -55,60 +66,57 @@ const SignUp = ({ openTab, setOpenTab, t }) => {
             />
           </div>
 
-          <div>
-            <label className="block text-left text-gray-700 mb-2">{t("password")}</label>
-            <div className="relative w-full">
-              <input
-                type={showPassword1 ? 'text' : 'password'}
-                name="password"
-                id="password"
-                placeholder="●●●●●●●●"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-              />
-              <span
-                onClick={() => setShowPassword1(!showPassword1)}
-                className="absolute right-3 top-2 text-orange-500 cursor-pointer"
-              >
-                {showPassword1 ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths for eye-open */}
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths for eye-closed */}
-                  </svg>
-                )}
-              </span>
-            </div>
+          <label className="block text-left text-gray-700">{t("password")}</label>
+          <div className="relative w-full">
+            <input
+              type={showPassword1 ? 'text' : 'password'}
+              name="password"
+              id="password"
+              placeholder="●●●●●●●●"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+            <span
+              onClick={() => setShowPassword1(!showPassword1)}
+              className="absolute right-3 top-2 text-orange-500 cursor-pointer"
+            >
+              {showPassword1 ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  {/* SVG paths for eye-open */}
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  {/* SVG paths for eye-closed */}
+                </svg>
+              )}
+            </span>
           </div>
 
-          <div>
-            <label className="block text-left text-gray-700 mb-2">{t("confirmPassword")}</label>
-            <div className="relative w-full">
-              <input
-                type={showPassword2 ? 'text' : 'password'}
-                name="confirmpassword"
-                id="confirmpassword"
-                placeholder="●●●●●●●●"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-              />
-              <span
-                onClick={() => setShowPassword2(!showPassword2)}
-                className="absolute right-3 top-2 text-orange-500 cursor-pointer"
-              >
-                {showPassword2 ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths for eye-open */}
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    {/* SVG paths for eye-closed */}
-                  </svg>
-                )}
-              </span>
-            </div>
-            {passwordError && <p className="text-[#FF765B] mt-1">{passwordError}</p>}
+          <label className="block text-left text-gray-700">{t("confirmPassword")}</label>
+          <div className="relative w-full">
+            <input
+              type={showPassword2 ? 'text' : 'password'}
+              name="confirmpassword"
+              id="confirmpassword"
+              placeholder="●●●●●●●●"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+            <span
+              onClick={() => setShowPassword2(!showPassword2)}
+              className="absolute right-3 top-2 text-orange-500 cursor-pointer"
+            >
+              {showPassword2 ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  {/* SVG paths for eye-open */}
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  {/* SVG paths for eye-closed */}
+                </svg>
+              )}
+            </span>
           </div>
+          {passwordError && <p className="text-[#FF765B] mt-1">{passwordError}</p>}
+
 
           <div className="flex justify-center">
             <a onClick={(e) => { e.preventDefault(); setOpenTab('forgotPassword') }} href="/forgot" className="text-[#FF765B] hover:underline">{t("forgotPassword")}</a>
