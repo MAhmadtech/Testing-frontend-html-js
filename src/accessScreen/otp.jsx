@@ -10,10 +10,10 @@ const OTP = ({ setOpenTab, otpEmail, t }) => {
 
         {/* Email Verification Message */}
         <div className="flex flex-col items-center">
-          <p className="text-[#005666] text-lg md:text-xl font-semibold mb-2">
+          <p className="text-[#005666] text-lg md:text-xl font-proximasemibold mb-2">
             {t("checkYourEmail")} <br /> {t("linkSentMessage")}
           </p>
-          <p className="text-[#005666] text-xl md:text-2xl font-semibold">{otpEmail}</p>
+          <p className="text-[#005666] text-xl md:text-2xl font-proximasemibold">{otpEmail}</p>
         </div>
 
         {/* Resend Code & Navigation */}

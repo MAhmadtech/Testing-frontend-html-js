@@ -46,7 +46,7 @@ const ResponseBubble = ({ currentLanguage, Title, response, Question }) => {
       {Title !== 'NoTitle' ? (
         <div className="w-auto px-4 py-3 left-0 relative bg-white/75 rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px] shadow flex-col justify-center items-start gap-2.5 inline-flex">
           <div className="flex-col justify-start items-start gap-3 flex">
-            <div className="w-auto text-[#ff765b] text-2xl font-semibold font-['Proxima Nova'] leading-[30px]">
+            <div className="w-auto text-[#ff765b] text-2xl font-proximasemibold font-['Proxima Nova'] leading-[30px]">
               {Title}
             </div>
             <div className="self-stretch flex-col justify-start items-end gap-4 flex">
@@ -89,7 +89,7 @@ const ResponseBubble = ({ currentLanguage, Title, response, Question }) => {
       ) : Title === '' ? (
         <div className="w-auto px-4 py-3 left-0 relative bg-white/75 rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px] shadow flex-col justify-center items-start gap-2.5 inline-flex">
           <div className="flex-col justify-start items-start gap-3 flex">
-            <div className="w-auto text-[#ff765b] text-2xl font-semibold font-['Proxima Nova'] leading-[30px]">
+            <div className="w-auto text-[#ff765b] text-2xl font-proximasemibold font-['Proxima Nova'] leading-[30px]">
               {Title}
             </div>
             <div className="self-stretch flex-col justify-start items-end gap-4 flex">

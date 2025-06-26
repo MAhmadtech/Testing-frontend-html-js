@@ -61,7 +61,7 @@ const ForgotPassword = ({ setOpenTab, setOtpEmail, t }) => {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="w-full">
             {/* Email Input */}
-            <label className="text-[#035a53] text-base font-semibold leading-none font-['Poppins']">
+            <label className="text-[#035a53] text-base font-proximasemibold leading-none">
               {t("enterEmailPrompt")}
             </label>
             <input

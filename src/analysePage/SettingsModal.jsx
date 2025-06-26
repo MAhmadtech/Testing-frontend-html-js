@@ -16,7 +16,7 @@ const SettingsModal = ({ first_name, email, t }) => {
     <div className="text-end lg:text-start">
       <button
         onClick={() => setModalOpen(true)}
-        className="inline-flex items-center gap-3 text-base text-primary font-semibold rounded-full px-4 py-3 w-full hover:text-white hover:bg-secondary lg:text-lg lg:p-4"
+        className="inline-flex items-center gap-3 text-base text-primary font-proximasemibold rounded-full px-4 py-3 w-full hover:text-white hover:bg-secondary lg:text-lg lg:p-4"
       >
         <i className="fa-solid fa-gear"></i>
         {t("Settings")}
@@ -53,7 +53,7 @@ const SettingsModal = ({ first_name, email, t }) => {
 
               {/* Header */}
               <div className="flex justify-between items-center border-b p-6">
-                <h3 className="text-2xl text-[#006D81] font-semibold">{t("Settings")}</h3>
+                <h3 className="text-2xl text-[#006D81] font-proximasemibold">{t("Settings")}</h3>
                 <button
                   onClick={() => setModalOpen(false)}
                   className="text-gray-600 hover:text-gray-800"

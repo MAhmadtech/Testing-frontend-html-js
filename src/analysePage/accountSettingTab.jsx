@@ -64,7 +64,7 @@ const AccountTab = ({ openTab, first_name, email, t }) => {
     <div className={'block h-[430px] overflow-y-auto'}>
       <ToastContainer />
       <div className="w-full h-[71px] bg-[#ecf8f5] rounded-2xl flex justify-between items-center p-4">
-        <div className="text-[#005666] text-base font-medium leading-snug font-['Proxima Nova'] text-center">
+        <div className="text-[#005666] text-base font-proximamedium leading-snug font-['Proxima Nova'] text-center">
           {t("accountDetails")}
         </div>
         <div className="w-10 h-10 bg-[#006d81] rounded-full overflow-hidden justify-center items-center inline-flex">

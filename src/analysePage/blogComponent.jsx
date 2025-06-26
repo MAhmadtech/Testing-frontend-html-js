@@ -46,7 +46,7 @@ const BlogComponent = ({ t, posts, currentLanguage, userId }) => {
         />
       ) : (
         <div className={`${openTab === 'blog' ? 'block' : 'hidden'} transition ease-out duration-100 transform scale-90 opacity-100 flex flex-col gap-3 rounded-full`}>
-          <h3 className="text-2xl text-primary font-semibold">{t("recommended")}</h3>
+          <h3 className="text-2xl text-primary font-proximasemibold">{t("recommended")}</h3>
 
           {/* Featured Scroll */}
           <div className="overflow-x-auto custom-scrollbar">
@@ -66,7 +66,7 @@ const BlogComponent = ({ t, posts, currentLanguage, userId }) => {
                     alt="blog"
                   />
                   <div className="pr-8">
-                    <h4 className="text-xl text-secondary font-semibold">
+                    <h4 className="text-xl text-secondary font-proximasemibold">
                       {truncateText(post.title)}
                     </h4>
                     <p className="text-base text-[#006D81]">
@@ -83,7 +83,7 @@ const BlogComponent = ({ t, posts, currentLanguage, userId }) => {
                   </div>
                   <div className="flex gap-3">
                     <div className="text-sm text-[#B5B6B6]">{post.views_count} {t("views")}</div>
-                    <div className="text-sm text-[#005666] font-semibold">{post.likes_count} {t("likes")}</div>
+                    <div className="text-sm text-[#005666] font-proximasemibold">{post.likes_count} {t("likes")}</div>
                   </div>
                 </div>
               ))}
@@ -129,11 +129,11 @@ const BlogComponent = ({ t, posts, currentLanguage, userId }) => {
                       </div>
                       <div className="flex gap-1">
                         <div className="text-xs text-[#B5B6B6]">{post.views_count} {t("views")}</div>
-                        <div className="text-xs text-[#005666] font-semibold">{post.likes_count} {t("likes")}</div>
+                        <div className="text-xs text-[#005666] font-proximasemibold">{post.likes_count} {t("likes")}</div>
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-sm text-primary font-semibold">{truncateText(post.title)}</h4>
+                      <h4 className="text-sm text-primary font-proximasemibold">{truncateText(post.title)}</h4>
                       <p className="text-xs text-[#B5B6B6]">{truncateText(post.content)}</p>
                     </div>
                   </div>

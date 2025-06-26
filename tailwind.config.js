@@ -14,6 +14,7 @@ module.exports = {
     },
   fontFamily: {
         proximasemibold: ['"Proxima Nova Semibold"', 'sans-serif'],
+        proximamedium: ['"Proxima Nova Medium"', 'sans-serif'],
         proxima: ['"Proxima Nova Lt"', 'sans-serif'], // for the regular one
       },},
   },

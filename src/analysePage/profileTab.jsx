@@ -43,8 +43,8 @@ const ProfileTab = ({ t, userId }) => {
         <div className="flex flex-col gap-10">
           {/* Liked Articles Header */}
           <div className="flex justify-between">
-            <h3 className="text-2xl text-primary font-semibold">{t("likedArticles")}</h3>
-            <button className="text-base text-secondary font-semibold">{t("viewAll")}</button>
+            <h3 className="text-2xl text-primary font-proximasemibold">{t("likedArticles")}</h3>
+            <button className="text-base text-secondary font-proximasemibold">{t("viewAll")}</button>
           </div>
 
           {/* Articles List */}
@@ -62,7 +62,7 @@ const ProfileTab = ({ t, userId }) => {
 
           {/* Message History Section */}
           <div className="mt-0">
-            <h3 className="text-lg text-[#005666] font-semibold">{t("messageHistory")}</h3>
+            <h3 className="text-lg text-[#005666] font-proximasemibold">{t("messageHistory")}</h3>
             <div className="flex gap-4 flex-wrap">
               {conversations.length > 0 ? (
                 conversations.map((conv, index) => (
@@ -95,7 +95,7 @@ const ArticleCard = ({ post }) => {
       </div>
       <img className="w-[290px] h-[176px]" src={post.image || blogImage} alt="blog" />
       <div className="pr-8">
-        <h4 className="text-lg text-secondary font-semibold">
+        <h4 className="text-lg text-secondary font-proximasemibold">
           {truncate(post.title)}
         </h4>
         <p className="text-sm text-[#006D81] whitespace-pre-line">
@@ -104,7 +104,7 @@ const ArticleCard = ({ post }) => {
       </div>
       <div className="flex gap-3">
         <div className="text-xs text-[#B5B6B6]">{post.views_count} {t("views")}</div>
-        <div className="text-xs text-[#005666] font-semibold">{post.likes_count} {t("likes")}</div>
+        <div className="text-xs text-[#005666] font-proximasemibold">{post.likes_count} {t("likes")}</div>
       </div>
     </div>
   );

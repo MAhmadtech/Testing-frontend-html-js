@@ -15,7 +15,7 @@ const FollowUpTab = ({ openTab, onDone, t }) => {
     >
       <div className="w-full max-w-[554px] h-[430px] relative p-4">
         {/* Enable Follow-up Questions Header */}
-        <div className="absolute top-0 left-0 text-[#005666] text-xl md:text-2xl font-semibold leading-[30px] font-['Proxima Nova']">
+        <div className="absolute top-0 left-0 text-[#005666] text-xl md:text-2xl font-proximasemibold leading-[30px] font-['Proxima Nova']">
           {t("enableFollowUp")}
         </div>
 

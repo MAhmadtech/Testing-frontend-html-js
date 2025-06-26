@@ -99,7 +99,7 @@ const Analyse = ({ currentLanguage }) => {
               <div className="ml-3 text-sm font-proximasemibold">{promptType === 'free' ? t("free") : t("premium")}</div>
             </label>
           </div>
-          <div className="text-lg text-primary font-medium">{t("testItOut")}</div>
+          <div className="text-lg text-primary font-proximamedium">{t("testItOut")}</div>
         </div>
 
         <div className="custom-scrollbar overflow-y-auto bg-white rounded-[15px] relative shadow-md w-full p-6 h-auto">

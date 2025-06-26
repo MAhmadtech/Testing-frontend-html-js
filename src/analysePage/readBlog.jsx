@@ -73,7 +73,7 @@ const ReadBlog = ({ likes, id, userId, image, title, description, t, posts, curr
 
       {/* Blog Title Section */}
       <div className="mt-4 px-4">
-        <h4 className="text-2xl text-primary font-semibold mb-2">{title}</h4>
+        <h4 className="text-2xl text-primary font-proximasemibold mb-2">{title}</h4>
 
         {/* Blog Description */}
         <div className="text-sm text-gray-700 leading-relaxed text-justify">
