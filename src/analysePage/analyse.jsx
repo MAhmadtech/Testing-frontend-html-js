@@ -80,7 +80,7 @@ const Analyse = ({ currentLanguage }) => {
       <div className="flex flex-col w-full lg:w-8/12">
         <div className='p-6 md:p-0'>
           <div className="flex flex-row justify-between items-center">
-            <div className="text-2xl text-primary font-['Proxima Nova SemiBold']">{t("gutFeeling")}</div>
+            <div className="text-2xl text-primary font-proximasemibold">{t("gutFeeling")}</div>
             {/* Toggle Button parallel to "gutFeeling" text */}
             <label htmlFor="toggleFreePremium" className="flex items-center cursor-pointer">
               <div className="relative">
@@ -96,7 +96,7 @@ const Analyse = ({ currentLanguage }) => {
                   className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition ${promptType === 'premium' ? 'transform translate-x-6 bg-primary' : ''}`}
                 ></div>
               </div>
-              <div className="ml-3 text-sm font-['Proxima Nova SemiBold']">{promptType === 'free' ? t("free") : t("premium")}</div>
+              <div className="ml-3 text-sm font-proximasemibold">{promptType === 'free' ? t("free") : t("premium")}</div>
             </label>
           </div>
           <div className="text-lg text-primary font-medium">{t("testItOut")}</div>

@@ -2,20 +2,13 @@
 @font-face {
   font-family: 'Proxima Nova Lt';
   src: url('proxima-nova/Fontspring-DEMO-proximanova-light.otf') format('opentype');
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Proxima Nova SemiBold';
   src: url('proxima-nova/Fontspring-DEMO-proximanovacond-semibold.otf') format('opentype');
   font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Proxima Nova Lt';
-  src: url('proxima-nova/Fontspring-DEMO-proximanova-light.otf') format('opentype');
-  font-weight: 700;
   font-style: normal;
 }
 

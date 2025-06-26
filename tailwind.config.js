@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/**/*.{html,js,jsx,ts,tsx}",
@@ -10,7 +11,11 @@ module.exports = {
       info: "#88C1BA",
       disableBg: "#E5E7E7",
       customgray: "#FBFBFB",
-    },},
+    },
+  fontFamily: {
+        proximasemibold: ['"Proxima Nova Semibold"', 'sans-serif'],
+        proxima: ['"Proxima Nova Lt"', 'sans-serif'], // for the regular one
+      },},
   },
   plugins: [
     function ({ addComponents }) {
