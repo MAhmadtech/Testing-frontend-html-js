@@ -93,7 +93,7 @@ const ArticleCard = ({ post }) => {
       <div className="absolute top-3 left-3 text-xs text-white bg-secondary rounded-[100px] px-2 py-1">
         {post.topic || t("relationships")}
       </div>
-      <img className="w-[290px] h-[176px]" src={post.image || blogImage} alt="blog" />
+      <img className="w-[290px] rounded-[5%] h-[176px]" src={post.image || blogImage} alt="blog" />
       <div className="pr-8">
         <h4 className="text-lg text-secondary font-proximasemibold">
           {truncate(post.title)}
