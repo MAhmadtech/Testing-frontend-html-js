@@ -5,7 +5,7 @@ import UserAccessScreen from './accessScreen/loginScreen';
 import PasswordReset from './accessScreen/resetPassword';
 import BlogPosts from './analysePage/blogpost';
 import readBlog from './analysePage/readBlog';
-
+import LandingPage from './accessScreen/landing_page';
 function PrivateRoute({ element, isAuthenticated }) {
   // Log for debugging
   console.log('Is authenticated:', isAuthenticated);
@@ -20,9 +20,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Login Screen Route */}
+        {/* Landing Page Route */}
         <Route 
           path="/" 
+          element={<LandingPage />} 
+        />
+        {/* Login Screen Route */}
+        <Route 
+          path="/login" 
           element={<UserAccessScreen setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
         />
 
