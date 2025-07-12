@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-const UserAccessScreen = ({ setLoginCredentials, setCurrentLanguage }) => {
-  const [openTab, setOpenTab] = useState('login');
+const UserAccessScreen = ({ setLoginCredentials, setCurrentLanguage , openTab: initialTab }) => {
+  const [openTab, setOpenTab] = useState(initialTab || 'login');
   const [otpEmail, setOtpEmail] = useState(""); // state to hold the email
   const { i18n, t } = useTranslation(["Translations"]);
 

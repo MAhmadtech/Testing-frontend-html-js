@@ -1,23 +1,13 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap'); */
-@font-face {
-  font-family: "Proxima Nova Regular";
-  src: url("sensrif-regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
 
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("sensrif-medium.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
+
+
 
 body {
   margin: 0;
   padding: 0;
   background: #fbfbfb;
-  font-family: "Lexend", sans-serif;
+  font-family: "Lexend", sans-serif,sans-serif;
   font-style: normal;
   font-optical-sizing: auto;
   overflow: hidden;
@@ -66,7 +56,7 @@ body {
   border: 1px solid #ff765b;
   filter: drop-shadow(0px 8px 16px rgba(133, 133, 133, 0.12));
   border-radius: 100px;
-  font-family: "Sensrif";
+  font-family: sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -79,12 +69,12 @@ body {
 
 #register {
   width: 100%;
-  max-width: 346px;
+  max-width: 351px;
   height: 52px;
   background: #ff765b;
   box-shadow: 0px 8px 16px rgba(133, 133, 133, 0.12);
   border-radius: 100px;
-  font-family: "Sensrif";
+  font-family: sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -115,10 +105,10 @@ body {
 
 #FrontMobile {
   position: absolute;
-  width: 157%;
+  width: 155%;
   height: auto;
-  right: -2%;
-  top: 24%;
+  right: 3%;
+  top: 21%;
   transform: rotate(5deg);
   z-index: 2;
   pointer-events: none;
@@ -149,7 +139,7 @@ body {
 }
 
 .language-text {
-  font-family: "Sensrif";
+  font-family: sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #ffffff;
@@ -162,6 +152,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+img{
+  max-width: 155%;
 }
 
 .language-icon img,
@@ -183,7 +176,7 @@ body {
 
   #FrontMobile {
       width: 153%;
-      right: 10%;
+      right: 3%;
   }
 }
 
@@ -202,8 +195,8 @@ body {
   }
 
   #FrontMobile {
-      transform: rotate(-6deg);
-      right: 10%;
+      transform: rotate(5deg);
+      right: 3%;
   }
 }
 
@@ -239,9 +232,9 @@ body {
 
   #FrontMobile {
       width: 186%;
-      right: 0%;
-      top: 13%;
-      transform: rotate(-5deg);
+      right: 10%;
+      top: 25%;
+      transform: rotate(-1deg);
   }
 
   .language-selector {
@@ -273,7 +266,7 @@ body {
 
   #FrontMobile {
       width: 181%;
-      right: -9%;
+      right: -1%;
       transform: rotate(-1deg);
   }
 
@@ -286,3 +279,4 @@ body {
       font-size: 12px;
   }
 }
+

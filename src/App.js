@@ -23,12 +23,15 @@ function App() {
         {/* Landing Page Route */}
         <Route 
           path="/" 
-          element={<LandingPage />} 
+          element={<LandingPage currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />} 
         />
-        {/* Login Screen Route */}
         <Route 
           path="/login" 
-          element={<UserAccessScreen setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
+          element={<UserAccessScreen openTab="login" setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
+        />
+        <Route 
+          path="/signup" 
+          element={<UserAccessScreen openTab="signup" setLoginCredentials={setLoginCredentials} setCurrentLanguage={setCurrentLanguage} />} 
         />
 
         {/* Protected Analyse Route */}
