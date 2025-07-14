@@ -13,6 +13,7 @@ const LoginViewURL = process.env.REACT_APP_BACKEND_URL + "/api/login";
 const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLanguage }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [language, setLanguage] = useState('en'); // default English
+  
 
   let navigate = useNavigate();
 
@@ -71,20 +72,13 @@ const Login = ({ openTab, setOpenTab, setLoginCredentials, i18n, t, setCurrentLa
 
   return (
     <div className="bg-white w-full h-full p-6 flex flex-col justify-center text-center md:w-10/12 lg:w-10/12">
-      {/* <select
-        value={language}
-        onChange={handleLanguageChange}
-        className="min-w-xs text-left bg-white border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-      >
-        <option value="en">English</option>
-        <option value="fr">French</option>
-      </select> */}
+     
       <div className="container mx-auto max-w-md">
         <button 
           onClick={() => navigate('/')} 
           className="mb-4 p-2 bg-transparent hover:bg-gray-200 text-gray-700 font-semibold hover:text-gray-800 rounded-lg border-2 border-gray-300 hover:border-gray-400"
         >
-          {t("back")}
+          {t("Back")}
         </button>
       </div>
 

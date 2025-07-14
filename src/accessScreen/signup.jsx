@@ -41,7 +41,15 @@ const SignUp = ({ openTab, setOpenTab, t }) => {
     <div className="bg-white w-full h-full  flex flex-col justify-center text-center md:w-10/12 lg:w-10/12">
       <ToastContainer />
       <div className="container mx-auto max-w-md">
-        <img src={logo} alt="Logo" />
+        <div className="flex justify-between items-center mb-4">
+          <img src={logo} alt="Logo" />
+          <button 
+            onClick={() => setOpenTab('login')}
+            className="text-sm text-gray-600 hover:text-gray-900"
+          >
+            {t("Back")}
+          </button>
+        </div>
         <p className="text-[#035A53] text-left mb-2">{t("underLogoText")}</p>
 
         <form className="space-y-2" action="POST" onSubmit={handleRegister}>

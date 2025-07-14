@@ -128,21 +128,27 @@ body {
   border-radius: 100px;
   min-width: 120px;
   box-sizing: border-box;
+  color: white;
 }
 
+#language-select.language-select{
+  background-color: black;
+}
 .language-icon {
   width: 20px;
   height: 20px;
   display: flex;
   align-items: center;
+  color: #ffffff;
   justify-content: center;
 }
+
 
 .language-text {
   font-family: sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #ffffff;
+  color: #181c53;
   white-space: nowrap;
 }
 
